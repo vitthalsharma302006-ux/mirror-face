@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mirror Face - See Your Real Self</title>
+    <title>Mirror Face - See Your REAL Self ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,50 +13,129 @@
         }
 
         :root {
-            --primary: #ff6b9d;
-            --secondary: #c06c84;
-            --dark: #1a1a2e;
+            --primary: #ff006e;
+            --secondary: #00f5ff;
+            --accent: #ffbe0b;
+            --dark: #0a0e27;
             --light: #f5f5f5;
             --white: #ffffff;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: var(--dark);
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #2d1b69 100%);
+            color: var(--white);
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '☀️';
+            position: fixed;
+            font-size: 500px;
+            opacity: 0.05;
+            top: -150px;
+            right: -150px;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 25s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(80px) rotate(20deg); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 110, 0.5), 0 0 40px rgba(0, 245, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 110, 0.8), 0 0 60px rgba(0, 245, 255, 0.6); }
+        }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounce-in {
+            0% { opacity: 0; transform: scale(0.8) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         /* Navigation */
         nav {
-            background: rgba(255, 255, 255, 0.98);
-            padding: 1rem 2rem;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid var(--secondary);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.1);
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         nav a {
-            color: var(--dark);
+            color: var(--secondary);
             text-decoration: none;
-            margin-left: 2rem;
+            margin-left: 2.5rem;
             font-size: 0.95rem;
-            transition: color 0.3s;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
         }
 
         nav a:hover {
             color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* Hero Section */
@@ -66,83 +146,113 @@
             justify-content: center;
             text-align: center;
             padding: 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(0, 245, 255, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 0, 110, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(0, 245, 255, 0.15) 0%, transparent 50%);
+            animation: move 15s ease infinite;
+        }
+
+        @keyframes move {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
-            color: var(--white);
+            font-size: 4.5rem;
+            font-weight: 900;
             margin-bottom: 1rem;
-            font-weight: 800;
-            line-height: 1.2;
-            animation: fadeInDown 0.8s ease-out;
+            line-height: 1.1;
+            animation: bounce-in 0.8s ease-out;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: bounce-in 0.8s ease-out, gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero-content p {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 2.5rem;
             max-width: 600px;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+            animation: slide-in 0.8s ease-out 0.2s backwards;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--primary);
-            color: var(--white);
+            padding: 1.2rem 3rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: var(--dark);
             text-decoration: none;
             border-radius: 50px;
             font-size: 1.1rem;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 900;
+            transition: all 0.3s;
             cursor: pointer;
-            border: none;
-            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+            border: 2px solid var(--secondary);
+            animation: bounce-in 0.8s ease-out 0.4s backwards;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 0, 110, 0.6), 0 0 20px rgba(0, 245, 255, 0.4);
+            animation: pulse-glow 1s ease-in-out infinite;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .cta-button:active {
+            transform: translateY(-2px) scale(0.98);
         }
 
         /* How It Works */
         .how-it-works {
-            background: var(--white);
+            background: rgba(26, 26, 62, 0.6);
+            backdrop-filter: blur(10px);
             padding: 4rem 2rem;
-            margin: 2rem auto;
+            margin: 3rem auto;
             max-width: 1200px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.2), inset 0 0 20px rgba(0, 245, 255, 0.1);
         }
 
         .how-it-works h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 3rem;
-            color: var(--dark);
+            color: var(--white);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .steps {
@@ -153,71 +263,111 @@
 
         .step {
             text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 10px;
-            transition: transform 0.3s;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(0, 245, 255, 0.1) 100%);
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
         }
 
         .step:hover {
             transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+        }
+
+        .step:hover::before {
+            transform: translateX(100%);
         }
 
         .step-number {
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: var(--white);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: var(--dark);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 900;
             margin: 0 auto 1rem;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.4);
         }
 
         .step h3 {
             margin-bottom: 0.5rem;
-            color: var(--dark);
+            color: var(--secondary);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .step p {
+            color: rgba(255, 255, 255, 0.8);
         }
 
         /* Important Notice */
         .notice {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
+            background: linear-gradient(135deg, rgba(255, 190, 11, 0.15) 0%, rgba(255, 0, 110, 0.1) 100%);
+            border-left: 4px solid var(--accent);
+            border-radius: 15px;
             padding: 1.5rem;
             margin: 2rem auto;
             max-width: 1200px;
-            border-radius: 8px;
             font-size: 0.95rem;
+            backdrop-filter: blur(10px);
         }
 
         .notice h3 {
-            color: #856404;
+            color: var(--accent);
             margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
         }
 
         .notice p {
-            color: #856404;
+            color: rgba(255, 255, 255, 0.8);
             margin: 0.5rem 0;
         }
 
         /* Tool Section */
         .tool-section {
-            background: var(--white);
+            background: rgba(26, 26, 62, 0.6);
+            backdrop-filter: blur(10px);
             padding: 3rem 2rem;
-            margin: 2rem auto;
+            margin: 3rem auto;
             max-width: 1000px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.2), inset 0 0 20px rgba(0, 245, 255, 0.1);
         }
 
         .tool-section h2 {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 2rem;
-            color: var(--dark);
+            color: var(--white);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .upload-section {
@@ -335,7 +485,7 @@
 
         /* Testimonials */
         .testimonials {
-            background: var(--light);
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 100%);
             padding: 4rem 2rem;
         }
 
@@ -346,9 +496,16 @@
 
         .testimonials-container h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 3rem;
-            color: var(--dark);
+            color: var(--white);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .testimonial-grid {
@@ -358,69 +515,243 @@
         }
 
         .testimonial {
-            background: var(--white);
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(0, 245, 255, 0.1) 100%);
+            border: 2px solid var(--primary);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
         }
 
         .testimonial:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.4);
+        }
+
+        .testimonial:hover::before {
+            transform: translateX(100%);
         }
 
         .stars {
-            color: #ffc107;
+            color: var(--accent);
             margin-bottom: 1rem;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
         }
 
         .testimonial-text {
-            color: #555;
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 1rem;
             font-style: italic;
+            font-size: 0.95rem;
         }
 
         .testimonial-author {
-            font-weight: 600;
-            color: var(--primary);
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1rem;
         }
 
         .testimonial-role {
             font-size: 0.85rem;
-            color: #999;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         /* Footer */
         footer {
-            background: var(--dark);
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 100%);
             color: var(--white);
             text-align: center;
             padding: 2rem;
             margin-top: 3rem;
+            border-top: 2px solid var(--secondary);
+            box-shadow: inset 0 2px 10px rgba(0, 245, 255, 0.1);
+        }
+
+        footer p {
+            font-weight: 500;
         }
 
         /* Ads */
         .ad-space {
-            background: #f0f0f0;
-            border: 1px solid #ddd;
-            padding: 1rem;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.05) 0%, rgba(255, 0, 110, 0.05) 100%);
+            border: 2px dashed var(--secondary);
+            padding: 1.5rem;
             text-align: center;
             margin: 2rem auto;
             max-width: 1200px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 0.85rem;
-            color: #999;
+            color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
         }
 
-        .info-box {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 4px;
+        /* Memes Section */
+        .memes-section {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 100%);
+            padding: 4rem 2rem;
+        }
+
+        .memes-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .memes-container h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--white);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .meme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .meme-card {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1) 0%, rgba(0, 245, 255, 0.1) 100%);
+            border: 2px solid var(--accent);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .meme-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 190, 11, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .meme-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            border-color: var(--primary);
+            box-shadow: 0 0 40px rgba(255, 190, 11, 0.4);
+        }
+
+        .meme-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .meme-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .meme-text {
+            color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .meme-subtext {
+            color: var(--secondary);
             font-size: 0.9rem;
-            color: #1565c0;
+            font-style: italic;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 100%);
+            padding: 4rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-container h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--white);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.15) 0%, rgba(0, 245, 255, 0.15) 100%);
+            border: 2px solid var(--secondary);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 60px rgba(255, 0, 110, 0.4), 0 0 40px rgba(0, 245, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .contact-name {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--white);
+            margin: 0;
+            letter-spacing: 2px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .contact-name {
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
         }
     </style>
 </head>
@@ -575,6 +906,78 @@
     <div class="ad-space">
         <!-- Google AdSense Code will go here -->
         Ad Space (Bottom)
+    </div>
+
+    <!-- Memes Section -->
+    <div class="memes-section">
+        <div class="memes-container">
+            <h2>😂 Indian Meme Realizations 😂</h2>
+            <div class="meme-grid">
+                <div class="meme-card">
+                    <div class="meme-emoji">🪞</div>
+                    <p class="meme-text">"Mom said I look better in person"</p>
+                    <p class="meme-subtext">Now I know she was talking about the REAL me, not the mirror version 💀</p>
+                </div>
+
+                <div class="meme-card">
+                    <div class="meme-emoji">😱</div>
+                    <p class="meme-text">"Why do I look different in photos?"</p>
+                    <p class="meme-subtext">Turns out the camera was right... my mirror was LYING to me all along 😭</p>
+                </div>
+
+                <div class="meme-card">
+                    <div class="meme-emoji">🤦</div>
+                    <p class="meme-text">"Girlfriend said I'm cuter in person"</p>
+                    <p class="meme-subtext">Me after using this tool: "Oh... NOW I understand what she meant" 💔</p>
+                </div>
+
+                <div class="meme-card">
+                    <div class="meme-emoji">📸</div>
+                    <p class="meme-text">"Why do my selfies look different?"</p>
+                    <p class="meme-subtext">Mirror selfies = catfish mode UNLOCKED 🎣</p>
+                </div>
+
+                <div class="meme-card">
+                    <div class="meme-emoji">🧢</div>
+                    <p class="meme-text">"Confidence level: Mirror selfie era"</p>
+                    <p class="meme-subtext">After this tool: "Confidence level: ZERO" 📉</p>
+                </div>
+
+                <div class="meme-card">
+                    <div class="meme-emoji">🎭</div>
+                    <p class="meme-text">"I'm not ugly, just mirrored"</p>
+                    <p class="meme-subtext">That's my story and I'm sticking to it 🚶</p>
+                </div>
+
+                <div class="meme-card">
+                    <div class="meme-emoji">😤</div>
+                    <p class="meme-text">"Insta caption: 'Just woke up like this'"</p>
+                    <p class="meme-subtext">Reality: *uploads mirror selfie* 💀</p>
+                </div>
+
+                <div class="meme-card">
+                    <div class="meme-emoji">💯</div>
+                    <p class="meme-text">"Mirror never lies... it just reverses"</p>
+                    <p class="meme-subtext">Plot twist: Mirror DID lie, I'm on the left side 😩</p>
+                </div>
+
+                <div class="meme-card">
+                    <div class="meme-emoji">🤐</div>
+                    <p class="meme-text">"Finding out how I REALLY look"</p>
+                    <p class="meme-subtext">My therapist: "And how does that make you feel?" Me: "Betrayed by glass 😒"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <div class="contact-container">
+            <h2>Contact</h2>
+            <div class="contact-card">
+                <p class="contact-name">V ☀️</p>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
