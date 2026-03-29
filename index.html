@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirror Face - See Your Real Self</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6b9d;
+            --secondary: #c06c84;
+            --dark: #1a1a2e;
+            --light: #f5f5f5;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--white);
+            padding: 4rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        /* Important Notice */
+        .notice {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .notice h3 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+
+        .notice p {
+            color: #856404;
+            margin: 0.5rem 0;
+        }
+
+        /* Tool Section */
+        .tool-section {
+            background: var(--white);
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .upload-section {
+            border: 3px dashed var(--primary);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f9f9f9;
+        }
+
+        .upload-section:hover {
+            background: #f0f0f0;
+            border-color: var(--secondary);
+        }
+
+        .upload-section.active {
+            border-color: var(--primary);
+            background: rgba(255, 107, 157, 0.1);
+        }
+
+        .upload-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .upload-hint {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .comparison-container {
+            display: none;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .comparison-container.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container.active {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .image-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            background: #f9f9f9;
+        }
+
+        .image-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .image-wrapper {
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            max-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .reset-btn {
+            display: none;
+            margin-top: 2rem;
+            width: 100%;
+            padding: 1rem;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .reset-btn.active {
+            display: block;
+        }
+
+        .reset-btn:hover {
+            background: #a85670;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--light);
+            padding: 4rem 2rem;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-container h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-text {
+            color: #555;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .testimonial-role {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Ads */
+        .ad-space {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">🪞 Mirror Face</a>
+        <div>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#tool">Try Now</a>
+            <a href="#reviews">Reviews</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>See Your REAL Face 🔄</h1>
+            <p>Discover how you actually look in real life vs. what you see in the mirror</p>
+            <button class="cta-button" onclick="document.getElementById('tool').scrollIntoView({behavior: 'smooth'})">
+                Try It Free Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Ad Space 1 -->
+    <div class="ad-space">
+        <!-- Google AdSense Code will go here -->
+        Ad Space (Top)
+    </div>
+
+    <!-- How It Works -->
+    <div class="how-it-works" id="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Upload Your Photo</h3>
+                <p>Take a mirror selfie or any photo you want to flip</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>We Flip It</h3>
+                <p>Our tool instantly mirrors your image horizontally</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Compare</h3>
+                <p>See the difference between mirror & real you side-by-side</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Important Notice -->
+    <div class="notice">
+        <h3>⚠️ Important: What This Tool Does</h3>
+        <p><strong>Best for:</strong> Mirror selfies and mirror photos. These are naturally flipped, so this tool shows you the un-flipped version.</p>
+        <p><strong>Not for:</strong> Regular camera photos taken with front-facing camera. Those are already the "real you" - no flip needed!</p>
+        <p><strong>Pro Tip:</strong> Use your rear camera for the most accurate representation of how you actually look to others (no mirror involved).</p>
+    </div>
+
+    <!-- Tool -->
+    <div class="tool-section" id="tool">
+        <h2>Try It Now</h2>
+        
+        <div class="upload-section" id="uploadSection">
+            <label for="fileInput" class="upload-label">📷 Upload Your Mirror Selfie</label>
+            <p class="upload-hint">Drag & drop or click to select an image</p>
+            <input type="file" id="fileInput" accept="image/*" />
+        </div>
+
+        <div class="comparison-container" id="comparisonContainer">
+            <div class="image-card">
+                <div class="image-label">Mirror Version (what you see)</div>
+                <div class="image-wrapper">
+                    <img id="mirrorImage" alt="Mirror version" />
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-label">Real You (actual appearance)</div>
+                <div class="image-wrapper">
+                    <img id="realImage" alt="Real appearance" />
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box" id="infoBox" style="display: none;">
+            The image on the left is the mirror version (flipped horizontally). The image on the right shows your actual appearance - how people see you in real life! Mirror images are naturally flipped, which is why you might look slightly different in person.
+        </div>
+
+        <button class="reset-btn" id="resetBtn">Upload Different Image</button>
+    </div>
+
+    <!-- Ad Space 2 -->
+    <div class="ad-space">
+        <!-- Google AdSense Code will go here -->
+        Ad Space (Middle)
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonials" id="reviews">
+        <div class="testimonials-container">
+            <h2>What People Are Saying</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"OMG this is mind-blowing! I never realized I looked like that in real life. Definitely sharing this with all my friends!"</p>
+                    <p class="testimonial-author">Priya Sharma</p>
+                    <p class="testimonial-role">Content Creator, Mumbai</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Finally understand why my mirror selfies look different from how people tag me in photos. This is so cool!"</p>
+                    <p class="testimonial-author">Aditya Patel</p>
+                    <p class="testimonial-role">Student, Bangalore</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Showed this to my whole squad. Everyone's obsessed! Best discovery ever 😂"</p>
+                    <p class="testimonial-author">Neha Gupta</p>
+                    <p class="testimonial-role">Fashion Blogger, Delhi</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"This tool is incredible. The side-by-side comparison is exactly what I needed. Worth every second!"</p>
+                    <p class="testimonial-author">Rohan Singh</p>
+                    <p class="testimonial-role">Photographer, Pune</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Made me understand mirror asymmetry perfectly. My friends couldn't believe the difference! 🤯"</p>
+                    <p class="testimonial-author">Anjali Desai</p>
+                    <p class="testimonial-role">Beauty Enthusiast, Jaipur</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I'm using this for my TikTok videos. The engagement is through the roof! Highly recommend!"</p>
+                    <p class="testimonial-author">Vikram Reddy</p>
+                    <p class="testimonial-role">TikTok Creator, Hyderabad</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Space 3 -->
+    <div class="ad-space">
+        <!-- Google AdSense Code will go here -->
+        Ad Space (Bottom)
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Mirror Face. See yourself clearly.</p>
+        <p style="font-size: 0.85rem; margin-top: 1rem;">Privacy • Terms • Contact</p>
+    </footer>
+
+    <script>
+        const uploadSection = document.getElementById('uploadSection');
+        const fileInput = document.getElementById('fileInput');
+        const comparisonContainer = document.getElementById('comparisonContainer');
+        const mirrorImage = document.getElementById('mirrorImage');
+        const realImage = document.getElementById('realImage');
+        const infoBox = document.getElementById('infoBox');
+        const resetBtn = document.getElementById('resetBtn');
+
+        uploadSection.addEventListener('click', () => fileInput.click());
+
+        uploadSection.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadSection.classList.add('active');
+        });
+
+        uploadSection.addEventListener('dragleave', () => {
+            uploadSection.classList.remove('active');
+        });
+
+        uploadSection.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadSection.classList.remove('active');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            if (files.length === 0) return;
+
+            const file = files[0];
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const originalSrc = e.target.result;
+
+                mirrorImage.src = originalSrc;
+
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+
+                    ctx.translate(canvas.width, 0);
+                    ctx.scale(-1, 1);
+                    ctx.drawImage(img, 0, 0);
+
+                    realImage.src = canvas.toDataURL();
+                };
+                img.src = originalSrc;
+
+                comparisonContainer.classList.add('active');
+                infoBox.style.display = 'block';
+                resetBtn.classList.add('active');
+                uploadSection.style.display = 'none';
+
+                document.getElementById('tool').scrollIntoView({behavior: 'smooth'});
+            };
+            reader.readAsDataURL(file);
+        }
+
+        resetBtn.addEventListener('click', () => {
+            fileInput.value = '';
+            comparisonContainer.classList.remove('active');
+            infoBox.style.display = 'none';
+            resetBtn.classList.remove('active');
+            uploadSection.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
